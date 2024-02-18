@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id             Int              @id @default(autoincrement())
+  playerOptaId   String           @unique
+  firstname      String
+  lastname       String
+  position       String           @db.VarChar(255)
+  optaPosition   String
+  teamId         Int?
+  teamOptaId     String
+  attack         Float            @default(0)
+  defense        Float            @default(0)
+  strength       Float            @default(0)
+  impact         Float            @default(0)
+  skills         Float            @default(0)
+  scoring        Float            @default(0)
+  Team           Team?            @relation(fields: [teamId], references: [id])
+  RealGamePlayer RealGamePlayer[]
+}
+
+model RealGame {
+  id                             Int              @id @default(autoincrement())
+  realGameOptaId                 String           @unique
+  awayScore                      Int              @default(0)
+  awayTeamName                   String?
+  awayTeamOptaId                 String?
+  awayTeamId                     Int?
+  homeScore                      Int              @default(0)
+  homeTeamId                     Int?
+  homeTeamName                   String
+  homeTeamOptaId                 String
+  compName                       String
+  datetime                       DateTime?
+  date                           String?
+  winnerTeamOptaId               String?
+  seasonOptaId                   String
+  status                         String           @db.VarChar(255)
+  round                          Int              @default(0)
+  roundType                      String           @default("UNKNOWN") @db.VarChar(255)
+  championshipSeasonId           Int
+  Team_RealGame_awayTeamIdToTeam Team?            @relation("RealGame_awayTeamIdToTeam", fields: [awayTeamId], references: [id])
+  Team_RealGame_homeTeamIdToTeam Team?            @relation("RealGame_homeTeamIdToTeam", fields: [homeTeamId], references: [id])
+  RealGamePlayer                 RealGamePlayer[]
+}
+
+model RealGamePlayer {
+  realGameId           Int
+  realGameOptaId       String
+  name                 String?
+  optaPosition         String?
+  playerOptaId         String
+  position             String    @db.VarChar(255)
+  positionOptaId       String
+  playerStats          Json
+  teamId               Int?
+  teamOptaId           String
+  playerId             Int?
+  playerPoints         Float?
+  playerStatusUpdateAt DateTime?
+  Player               Player?   @relation(fields: [playerId], references: [id])
+  RealGame             RealGame  @relation(fields: [realGameId], references: [id])
+
+  @@id([realGameOptaId, playerOptaId])
+}
+
+model Team {
+  id                                 Int        @id @default(autoincrement())
+  teamOptaId                         String     @unique
+  name                               String
+  coachOptaId                        String?
+  Player                             Player[]
+  RealGame_RealGame_awayTeamIdToTeam RealGame[] @relation("RealGame_awayTeamIdToTeam")
+  RealGame_RealGame_homeTeamIdToTeam RealGame[] @relation("RealGame_homeTeamIdToTeam")
+}
