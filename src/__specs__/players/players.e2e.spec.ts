@@ -1,9 +1,8 @@
 import { HttpServer } from '@nestjs/common';
 import * as request from 'supertest';
-import { startTestApp, stopTestApp } from '../db/setup';
 import { clearDb } from '../db/db';
 import { getPlayer, getPlayers } from '../db/players-db';
-import { CreatedPlayerDto } from 'src/players/dto';
+import { startTestApp, stopTestApp } from '../db/setup';
 
 const baseEndpoint = '/players';
 
