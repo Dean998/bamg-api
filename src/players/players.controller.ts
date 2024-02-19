@@ -10,18 +10,20 @@ import {
 } from '@nestjs/common';
 import { Player } from '@prisma/client';
 import { PlayersService } from './players.service';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { CreatedPlayerDto, UpdatePlayerDto } from './dto';
 
 @Controller('players')
 export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Post()
-  create(@Body() createPlayer: Player): Promise<Player> {
+  create(@Body() createPlayer: CreatePlayerDto): Promise<CreatedPlayerDto> {
     return this.playersService.create(createPlayer);
   }
 
   @Get()
-  findAll(): Promise<Player[]> {
+  findAll(): Promise<CreatedPlayerDto[]> {
     return this.playersService.findAll();
   }
 
@@ -31,12 +33,15 @@ export class PlayersController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updatePlayer: Player) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePlayer: UpdatePlayerDto,
+  ) {
     return this.playersService.update(id, updatePlayer);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number): Promise<Player> {
+  remove(@Param('id', ParseIntPipe) id: number): Promise<CreatedPlayerDto> {
     return this.playersService.remove(id);
   }
 }

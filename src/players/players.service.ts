@@ -2,22 +2,24 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Player } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { PrismaService } from '../prisma.service';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { CreatedPlayerDto, UpdatePlayerDto } from './dto';
 
 @Injectable()
 export class PlayersService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createPlayer: Player): Promise<Player> {
+  async create(createPlayer: CreatePlayerDto): Promise<CreatedPlayerDto> {
     return this.prisma.player.create({
       data: createPlayer,
     });
   }
 
-  async findAll(): Promise<Player[]> {
+  async findAll(): Promise<CreatedPlayerDto[]> {
     return this.prisma.player.findMany({});
   }
 
-  async findOne(id: number): Promise<Player> {
+  async findOne(id: number): Promise<CreatedPlayerDto> {
     const player = await this.prisma.player.findUnique({
       where: { id },
       include: { RealGamePlayer: true },
@@ -28,10 +30,14 @@ export class PlayersService {
     return player;
   }
 
-  async update(id: number, updatePlayer: Player): Promise<Player> {
+  async update(
+    id: number,
+    updatePlayer: UpdatePlayerDto,
+  ): Promise<CreatedPlayerDto> {
+    const { firstName, lastName } = updatePlayer;
     try {
       const updated = await this.prisma.player.update({
-        data: updatePlayer,
+        data: { firstName, lastName },
         where: { id },
       });
       return updated;
@@ -45,7 +51,7 @@ export class PlayersService {
     }
   }
 
-  async remove(id: number): Promise<Player> {
+  async remove(id: number): Promise<CreatedPlayerDto> {
     try {
       const player = await this.prisma.player.findUnique({
         where: { id },
