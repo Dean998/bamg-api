@@ -7,7 +7,7 @@ import { startTestApp, stopTestApp } from '../db/setup';
 const baseEndpoint = '/players';
 
 const testPlayer = {
-  playerOptaId: 'Should stay the same ',
+  playerOptaId: 'Should stay the same',
   firstName: 'Hi',
   lastName: 'Doe',
   position: 'Midfielder',
