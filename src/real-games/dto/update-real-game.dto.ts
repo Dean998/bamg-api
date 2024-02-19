@@ -1,10 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber } from 'class-validator';
 
 export class UpdateRealGameDto {
+  @ApiProperty()
   @IsNumber()
   homeScore: number;
 
+  @ApiProperty()
   @IsNumber()
   awayScore: number;
 }

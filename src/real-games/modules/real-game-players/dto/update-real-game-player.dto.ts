@@ -1,18 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsDate,
-  IsEnum,
-  IsInt,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsDate, IsInt, IsOptional } from 'class-validator';
 
 export class UpdateRealGamePlayerDto {
+  @ApiProperty()
   @IsOptional()
   @IsInt()
   playerPoints?: number;
 
+  @ApiProperty()
   @IsOptional()
   @IsDate()
   playerStatusUpdateAt?: Date;
