@@ -147,6 +147,6 @@ Implementing a backend system using NestJS, Prisma, TypeScript, and Jest for tes
   - **PlayerStats Table**: For storing the stats for players in a structured way and generate uuid instead of putting realGameOptaId and playerOptaId together
   - **Coach Table**: For detailed information about coaches.
 
-Other database suggestions removing unnessary fields such as date and datetime from real game table which can just be date and can be converted to other formats if necessary.
+Other database suggestions would be to remove duplicate fields such as date and datetime from real game table which can just be date and can be converted to other formats if necessary.
 
 Thank you for reading my submission.
