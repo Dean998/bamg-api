@@ -11,7 +11,11 @@ import {
 } from '@nestjs/common';
 import { Player, RealGame, RealGamePlayer } from '@prisma/client';
 import { RealGamePlayersService } from './real-game-players.service';
-import { CreateRealGamePlayerDto, CreatedRealGamePlayerDto } from './dto';
+import {
+  CreateRealGamePlayerDto,
+  CreatedRealGamePlayerDto,
+  UpdateRealGamePlayerDto,
+} from './dto';
 
 @Controller('real-games/:realGameId/players')
 export class RealGamePlayersController {
@@ -45,7 +49,7 @@ export class RealGamePlayersController {
   update(
     @Param('realGameId', ParseIntPipe) realGameId: number,
     @Param('id', ParseIntPipe) playerId: number,
-    @Body() updateRealGamePlayer: RealGamePlayer,
+    @Body() updateRealGamePlayer: UpdateRealGamePlayerDto,
   ) {
     return this.realGamePlayersService.update(
       realGameId,

@@ -28,7 +28,7 @@ export class PlayersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<CreatedPlayerDto> {
     return this.playersService.findOne(id);
   }
 
@@ -36,7 +36,7 @@ export class PlayersController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePlayer: UpdatePlayerDto,
-  ) {
+  ): Promise<CreatedPlayerDto> {
     return this.playersService.update(id, updatePlayer);
   }
 

@@ -8,13 +8,12 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { RealGamesService } from './real-games.service';
-import { Player, RealGame } from '@prisma/client';
 import {
   CreateRealGameDto,
   CreatedRealGameDto,
   UpdateRealGameDto,
 } from './dto';
+import { RealGamesService } from './real-games.service';
 
 @Controller('real-games')
 export class RealGamesController {

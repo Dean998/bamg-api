@@ -2,7 +2,7 @@ import { IsNumber, IsOptional, IsString, IsDate } from 'class-validator';
 
 export class CreateRealGameDto {
   @IsString()
-  readonly realGameOptaId: string;
+  realGameOptaId: string;
 
   @IsNumber()
   awayScore: number;
@@ -37,11 +37,11 @@ export class CreateRealGameDto {
 
   @IsOptional()
   @IsDate()
-  readonly datetime?: Date;
+  datetime?: Date;
 
   @IsOptional()
   @IsString()
-  readonly date?: string;
+  date?: string;
 
   @IsOptional()
   @IsString()
@@ -60,5 +60,5 @@ export class CreateRealGameDto {
   roundType: string;
 
   @IsNumber()
-  readonly championshipSeasonId: number;
+  championshipSeasonId: number;
 }
