@@ -10,8 +10,8 @@ datasource db {
 model Player {
   id             Int              @id @default(autoincrement())
   playerOptaId   String           @unique
-  firstname      String
-  lastname       String
+  firstName      String           @map("firstname")
+  lastName       String           @map("lastname")
   position       String           @db.VarChar(255)
   optaPosition   String
   teamId         Int?
