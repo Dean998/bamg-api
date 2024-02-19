@@ -16,8 +16,8 @@ export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Post()
-  create(@Body() createPlayerDto: Player): Promise<Player> {
-    return this.playersService.create(createPlayerDto);
+  create(@Body() createPlayer: Player): Promise<Player> {
+    return this.playersService.create(createPlayer);
   }
 
   @Get()
@@ -31,11 +31,8 @@ export class PlayersController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateProfileDto: Player,
-  ) {
-    return this.playersService.update(id, updateProfileDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() updatePlayer: Player) {
+    return this.playersService.update(id, updatePlayer);
   }
 
   @Delete(':id')

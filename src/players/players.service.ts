@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Player } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class PlayersService {
@@ -18,7 +18,10 @@ export class PlayersService {
   }
 
   async findOne(id: number): Promise<Player> {
-    const player = await this.prisma.player.findUnique({ where: { id } });
+    const player = await this.prisma.player.findUnique({
+      where: { id },
+      include: { RealGamePlayer: true },
+    });
     if (!player) {
       throw new NotFoundException();
     }
