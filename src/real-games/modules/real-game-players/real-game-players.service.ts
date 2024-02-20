@@ -104,9 +104,6 @@ export class RealGamePlayersService {
         where: { id: realGameId },
       });
 
-      console.log(realGame);
-
-      console.log(' i failed here ');
       const player = await this.prisma.player.findUnique({
         where: { id: playerId },
       });
