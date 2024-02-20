@@ -10,7 +10,7 @@ import {
   getRealGamePlayers,
   getRealGames,
   testRealGamePlayer,
-} from '../../db/players-db';
+} from '../../db/test-setup-db';
 import { startTestApp, stopTestApp } from '../../db/setup';
 
 const baseEndpoint = (realGameId: number) =>
