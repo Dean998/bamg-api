@@ -41,22 +41,22 @@ export class RealGamePlayersService {
     realGameId: number,
     playerId: number,
   ): Promise<CreatedRealGamePlayerDto> {
-    const { realGameOptaId } = await this.prisma.realGame.findUnique({
+    const realGame = await this.prisma.realGame.findUnique({
       where: { id: realGameId },
     });
-    const { playerOptaId } = await this.prisma.player.findUnique({
+    const player = await this.prisma.player.findUnique({
       where: { id: playerId },
     });
 
-    if (!realGameOptaId || !playerOptaId) {
+    if (!realGame || !player) {
       throw new NotFoundException('player or real game not found');
     }
 
     const realGamePlayer = await this.prisma.realGamePlayer.findUnique({
       where: {
         realGameOptaId_playerOptaId: {
-          realGameOptaId,
-          playerOptaId,
+          realGameOptaId: realGame.realGameOptaId,
+          playerOptaId: player.playerOptaId,
         },
       },
     });
@@ -74,6 +74,7 @@ export class RealGamePlayersService {
       const { realGameOptaId } = await this.prisma.realGame.findUnique({
         where: { id: realGameId },
       });
+
       const { playerOptaId } = await this.prisma.player.findUnique({
         where: { id: playerId },
       });
@@ -81,7 +82,10 @@ export class RealGamePlayersService {
       const updated = await this.prisma.realGamePlayer.update({
         data: updateRealGamePlayer,
         where: {
-          realGameOptaId_playerOptaId: { realGameOptaId, playerOptaId },
+          realGameOptaId_playerOptaId: {
+            realGameOptaId: realGameOptaId,
+            playerOptaId: playerOptaId,
+          },
         },
       });
       return updated;

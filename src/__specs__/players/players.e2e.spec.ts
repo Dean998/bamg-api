@@ -1,25 +1,10 @@
 import { HttpServer } from '@nestjs/common';
 import * as request from 'supertest';
 import { clearDb } from '../db/db';
-import { getPlayer, getPlayers } from '../db/players-db';
+import { getPlayer, getPlayers, testPlayer } from '../db/players-db';
 import { startTestApp, stopTestApp } from '../db/setup';
 
 const baseEndpoint = '/players';
-
-const testPlayer = {
-  playerOptaId: 'Should stay the same',
-  firstName: 'Hi',
-  lastName: 'Doe',
-  position: 'Midfielder',
-  optaPosition: 'MID',
-  teamOptaId: 'hello',
-  attack: 7.5,
-  defense: 6.2,
-  strength: 8.1,
-  impact: 7,
-  skills: 7.8,
-  scoring: 6.5,
-};
 
 describe(`${baseEndpoint}`, () => {
   let server: HttpServer;
