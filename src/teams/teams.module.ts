@@ -10,4 +10,4 @@ import { TeamsService } from './teams.service';
   imports: [],
   exports: [TeamsService],
 })
-export class PlayersModule {}
+export class TeamsModule {}

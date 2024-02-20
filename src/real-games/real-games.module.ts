@@ -10,4 +10,4 @@ import { RealGamesService } from './real-games.service';
   imports: [],
   exports: [RealGamesService],
 })
-export class PlayersModule {}
+export class RealGamesModule {}

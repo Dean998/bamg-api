@@ -7,15 +7,13 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
-import { Player, RealGame, RealGamePlayer } from '@prisma/client';
-import { RealGamePlayersService } from './real-game-players.service';
 import {
   CreateRealGamePlayerDto,
   CreatedRealGamePlayerDto,
   UpdateRealGamePlayerDto,
 } from './dto';
+import { RealGamePlayersService } from './real-game-players.service';
 
 @Controller('real-games/:realGameId/players')
 export class RealGamePlayersController {
